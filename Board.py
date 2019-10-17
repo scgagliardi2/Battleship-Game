@@ -25,7 +25,7 @@ class Board:
                              "5": 5, "6": 6, "7": 7, "8": 8, "9": 9, "10": 10}
         return column_dictionary.get(number)
 
-    def guess(self, coordinate):
+    def check_guess(self, coordinate):
         column = self.find_column(coordinate[0])
         row = self.find_row(coordinate[1])
         if self.board[column][row] == "o":
@@ -62,11 +62,5 @@ b1.place_ship(s1)
 
 b1.print_board()
 
-b1.guess("A1")
-b1.guess("A1")
-b1.guess("D4")
-b1.guess("B3")
-
-b1.print_board()
 
 
