@@ -1,10 +1,10 @@
 class Ship:
 
-    def __init__(self, hits, ship_type, start, finish):
+    def __init__(self, hits, ship_type, start, direction):
         self.hits = hits
         self.ship_type = ship_type
         self.start = start
-        self.finish = finish
+        self.direction = direction
 
     def ship_hit(self):
         self.hits -= 1
@@ -15,11 +15,12 @@ class Ship:
         column_dictionary = {"A": 2, "B": 3, "C": 4, "D": 5,
                              "E": 6, "F": 7, "G": 8, "H": 9, "I": 10, "J": 11}
         row_dictionary = {"1": 2, "2": 3, "3": 4, "4": 5,
-                             "5": 6, "6": 7, "7": 8, "8": 9, "9": 10, "10": 11}
-        if self.start[0] == self.finish[0]:
+                          "5": 6, "6": 7, "7": 8, "8": 9, "9": 10, "10": 11}
+        if self.direction == "right":
             coordinates = []
             length = self.hits
             while length != 0:
-                coordinates.append([column_dictionary.get(self.start[0]), row_dictionary.get(str(int(self.start[1]) + self.hits - length))])     
+                coordinates.append([row_dictionary.get(self.start[1]),
+                                    column_dictionary.get(self.start[0]) + self.hits - length])
                 length -= 1
             return coordinates

@@ -1,5 +1,6 @@
 import Ship
 
+
 class Board:
 
     def __init__(self):
@@ -52,15 +53,3 @@ class Board:
             for item in row:
                 print(item, end=" ")
         print()
-
-b1 = Board()
-
-b1.print_board()
-
-s1 = Ship.Ship(5, "carrier", "A1", "A2")
-b1.place_ship(s1)
-
-b1.print_board()
-
-
-
