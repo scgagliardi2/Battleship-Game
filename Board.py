@@ -42,10 +42,9 @@ class Board:
             return 0
 
     def place_ship(self, ship):
-        coordinates = Ship.Ship.ship_coordinates(ship)
+        coordinates = Ship.Ship.ship_coordinates(ship)        
         for item in coordinates:
-            for place in item:
-                self.board[item[0]-1][place-1] = "<"
+            self.board[item[0]-1][item[1]-1] = "<"
 
     def print_board(self):
         for row in self.board:

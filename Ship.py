@@ -24,3 +24,27 @@ class Ship:
                                     column_dictionary.get(self.start[0]) + self.hits - length])
                 length -= 1
             return coordinates
+        elif self.direction == "left":
+            coordinates = []
+            length = self.hits
+            while length != 0:
+                coordinates.append([row_dictionary.get(self.start[1]),
+                                    column_dictionary.get(self.start[0]) + length - self.hits])
+                length -= 1
+            return coordinates
+        elif self.direction == "down":
+            coordinates = []
+            length = self.hits
+            while length != 0:
+                coordinates.append([row_dictionary.get(self.start[1]) + self.hits - length,
+                                    column_dictionary.get(self.start[0])])
+                length -= 1
+            return coordinates
+        elif self.direction == "up":
+            coordinates = []
+            length = self.hits
+            while length != 0:
+                coordinates.append([row_dictionary.get(self.start[1]) - self.hits + length,
+                                    column_dictionary.get(self.start[0])])
+                length -= 1
+            return coordinates
