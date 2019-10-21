@@ -26,20 +26,28 @@ class Board:
                              "5": 5, "6": 6, "7": 7, "8": 8, "9": 9, "10": 10}
         return column_dictionary.get(number)
 
-    def check_guess(self, coordinate):
+    def check_guess(self, coordinate, board_in):
         column = self.find_column(coordinate[0])
         row = self.find_row(coordinate[1])
-        if self.board[column][row] == "o":
+         # check for row 10 input
+        try:
+            if coordinate[2] == "0":
+                row = 11
+            else:
+                pass
+        except IndexError:
+            pass
+        if self.board[row][column] == "o":
             print("You missed!")
-            self.board[column][row] = "M"
-            return 1
-        elif self.board[column][row] == "<":
+            board_in.board[row][column] = "M"
+            return True
+        elif self.board[row][column] == "<":
             print("Hit!")
-            self.board[column][row] = "H"
-            return 1
+            board_in.board[row][column] = "H"
+            return True
         else:
             print("You already guessed there!")
-            return 0
+            return False
 
     def place_ship(self, ship):
         coordinates = Ship.Ship.ship_coordinates(ship)        

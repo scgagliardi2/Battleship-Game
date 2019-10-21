@@ -1,15 +1,19 @@
 class Ship:
 
-    def __init__(self, hits, ship_type, start, direction):
+    def __init__(self, hits, name, start, direction):
         self.hits = hits
-        self.ship_type = ship_type
+        self.name = name
         self.start = start
         self.direction = direction
 
+    def ship_start(self, coordinate):
+        self.start = coordinate
+    
+    def ship_direction(self, direc):
+        self.direction = direc
+ 
     def ship_hit(self):
         self.hits -= 1
-        if self.hits == 0:
-            print("You sunk the enemy " + self.ship_type + "!")
 
     def ship_coordinates(self):
         column_dictionary = {"A": 2, "B": 3, "C": 4, "D": 5,
