@@ -16,35 +16,45 @@ class Ship:
                              "E": 6, "F": 7, "G": 8, "H": 9, "I": 10, "J": 11}
         row_dictionary = {"1": 2, "2": 3, "3": 4, "4": 5,
                           "5": 6, "6": 7, "7": 8, "8": 9, "9": 10, "10": 11}
+        column = column_dictionary.get(self.start[0])
+        row = row_dictionary.get(self.start[1])
+        # check for row 10 input
+        try:
+            if self.start[2] == "0":
+                row = 11
+            else:
+                pass
+        except IndexError:
+            pass
         if self.direction == "right":
             coordinates = []
             length = self.hits
             while length != 0:
-                coordinates.append([row_dictionary.get(self.start[1]),
-                                    column_dictionary.get(self.start[0]) + self.hits - length])
+                coordinates.append([row,
+                                    column + self.hits - length])
                 length -= 1
             return coordinates
         elif self.direction == "left":
             coordinates = []
             length = self.hits
             while length != 0:
-                coordinates.append([row_dictionary.get(self.start[1]),
-                                    column_dictionary.get(self.start[0]) + length - self.hits])
+                coordinates.append([row,
+                                    column + length - self.hits])
                 length -= 1
             return coordinates
         elif self.direction == "down":
             coordinates = []
             length = self.hits
             while length != 0:
-                coordinates.append([row_dictionary.get(self.start[1]) + self.hits - length,
-                                    column_dictionary.get(self.start[0])])
+                coordinates.append([row + self.hits - length,
+                                    column])
                 length -= 1
             return coordinates
         elif self.direction == "up":
             coordinates = []
             length = self.hits
             while length != 0:
-                coordinates.append([row_dictionary.get(self.start[1]) - self.hits + length,
-                                    column_dictionary.get(self.start[0])])
+                coordinates.append([row - self.hits + length,
+                                    column])
                 length -= 1
             return coordinates
