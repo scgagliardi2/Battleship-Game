@@ -120,19 +120,18 @@ while True:
     else:
         pass
 
-cp.personal_board.print_board()
 # #setup complete
 
-# while True:
+while True:
 
-#     #human guess
-#     while True:
-#         guess = input("Where would you like to guess? ")
-#         if human_player.check_input(guess):
-#             guess = guess.upper()
-#             if computer_personal_board.check_guess(guess, human_guess_board):
-#                 human_guess_board.print_board()
-#                 break
-#             else:
-#                 pass
+#human guess
+    while True:
+        guess = input("Where would you like to guess? ")
+        if hp.guess(guess):
+            guess = guess.upper()
+            if cp.personal_board.check_guess(guess, hp.guess_board):
+                hp.guess_board.print_board()
+                break
+            else:
+                pass
     

@@ -53,3 +53,17 @@ class Player:
         direction_dictionary = {1: "right", 2: "left", 3: "up", 4: "down"}
         direction = direction_dictionary.get(random.randint(1,4))
         return direction
+
+    def guess(self):
+        while True:
+            coordinate = input("Where do you want to guess? ")
+            print()
+            letter_list = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
+            number_list = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"] 
+            for letter in letter_list:
+                for number in number_list:
+                    check = letter + number
+                    if check == coordinate.upper():
+                        return True     
+            print("Please enter a valid coordinate. For example, 'A4' or 'H8'")
+            print()
