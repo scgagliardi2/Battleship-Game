@@ -45,15 +45,9 @@ class Board:
         coordinates = Ship.Ship.ship_coordinates(ship)        
         try:
             for item in coordinates:
-                if self.board[item[0]-1][item[1]-1] == "<":
+                if self.board[item[0]-1][item[1]-1] != "o":
                     print("You cannot place your ship there. Please pick a new location.")
                     return False
-                elif item[0] - 1 < 0:
-                    print("You cannot place your ship there. Please pick a new location.")
-                    return False
-                elif item[1] - 1 < 0:
-                    print("You cannot place your ship there. Please pick a new location.")
-                    return False    
                 else:
                     pass
         except IndexError:
@@ -62,6 +56,20 @@ class Board:
         for item in coordinates:
             self.board[item[0]-1][item[1]-1] = "<"
         return True           
+
+    def place_comp_ship(self, ship):
+        coordinates = Ship.Ship.ship_coordinates(ship)        
+        try:
+            for item in coordinates:
+                if self.board[item[0]-1][item[1]-1] != "o":
+                    return False
+                else:
+                    pass
+        except IndexError:
+            return False
+        for item in coordinates:
+            self.board[item[0]-1][item[1]-1] = "<"
+        return True
 
     def print_board(self):
         for row in self.board:
