@@ -14,6 +14,12 @@ class Ship:
  
     def ship_hit(self):
         self.hits -= 1
+        if self.hits == 0:
+            print("You sunk the enemy " + self.name + "!")
+            return True
+        else:
+            return False
+
 
     def ship_coordinates(self):
         column_dictionary = {"A": 2, "B": 3, "C": 4, "D": 5,

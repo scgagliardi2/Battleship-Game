@@ -1,10 +1,10 @@
 import random
+import Ship
+import Board
 
 class Player:
     
-    def __init__(self):
-        import Ship
-        import Board
+    def __init__(self, player_type):
         
         self.ships_left = 5
         self.carrier = Ship.Ship(5, "carrier", "A1", "A1")
@@ -13,7 +13,8 @@ class Player:
         self.submarine = Ship.Ship(3, "submarine", "A1", "A1")
         self.destroyer = Ship.Ship(2, "destroyer", "A1", "A1")
         self.personal_board = Board.Board()
-        self.guess_board = Board.Board()      
+        self.guess_board = Board.Board() 
+        self.player_type = player_type     
     
     def give_coordinate(self, ship):
         while True:
@@ -64,6 +65,30 @@ class Player:
                 for number in number_list:
                     check = letter + number
                     if check == coordinate.upper():
-                        return True     
+                        return coordinate.upper()     
             print("Please enter a valid coordinate. For example, 'A4' or 'H8'")
             print()
+
+    def comp_guess(self):
+        letter_list = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
+        number_list = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+        letter = letter_list[random.randint(1, 10)]
+        number = number_list[random.randint(1, 10)]
+        return letter + number
+
+    def ship_hit(self, ship):
+        if ship.ship_hit():
+            self.ships_left -= 1
+            if self.ships_left == 0:
+                if self.player_type == "human":
+                    print("You lost!")
+                    import sys
+                    sys.exit()
+                elif self.player_type == "computer":
+                    print("You won!")
+                    import sys
+                    sys.exit()
+            else:
+                pass
+        else:
+            pass

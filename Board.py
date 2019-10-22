@@ -1,4 +1,5 @@
 import Ship
+import Player
 
 class Board:
 
@@ -25,24 +26,55 @@ class Board:
                              "5": 5, "6": 6, "7": 7, "8": 8, "9": 9, "10": 10}
         return column_dictionary.get(number)
 
-    def check_guess(self, coordinate, board_in):
+    def check_guess(self, coordinate, board_in, player):
         column = self.find_column(coordinate[0])
         row = self.find_row(coordinate[1])
          # check for row 10 input
         try:
             if coordinate[2] == "0":
-                row = 11
+                row = 10
             else:
                 pass
         except IndexError:
             pass
         if self.board[row][column] == "o":
             print("You missed!")
-            board_in.board[row][column] = "M"
+            board_in.board[row][column] = "m"
             return True
         elif self.board[row][column] == "<":
             print("Hit!")
             board_in.board[row][column] = "H"
+            player.ship_hit(player.destroyer)
+            if player.player_type == "human":
+                player.personal_board[row][column] = "H"
+            return True
+        elif self.board[row][column] == "(":
+            print("Hit!")
+            board_in.board[row][column] = "H"
+            player.ship_hit(player.cruiser)
+            if player.player_type == "human":
+                player.personal_board[row][column] = "H"
+            return True
+        elif self.board[row][column] == "=":
+            print("Hit!")
+            board_in.board[row][column] = "H"
+            player.ship_hit(player.submarine)
+            if player.player_type == "human":
+                player.personal_board[row][column] = "H"
+            return True
+        elif self.board[row][column] == "{":
+            print("Hit!")
+            board_in.board[row][column] = "H"
+            player.ship_hit(player.battleship)
+            if player.player_type == "human":
+                player.personal_board[row][column] = "H"
+            return True
+        elif self.board[row][column] == "[":
+            print("Hit!")
+            board_in.board[row][column] = "H"
+            player.ship_hit(player.carrier)
+            if player.player_type == "human":
+                player.personal_board[row][column] = "H"
             return True
         else:
             print("You already guessed there!")
@@ -61,7 +93,16 @@ class Board:
             print("You cannot place your ship there. Please pick a new location.")
             return False
         for item in coordinates:
-            self.board[item[0]-1][item[1]-1] = "<"
+            if ship.name == "carrier":
+                self.board[item[0]-1][item[1]-1] = "["
+            elif ship.name == "battleship":
+                self.board[item[0]-1][item[1]-1] = "{"
+            elif ship.name == "cruiser":
+                self.board[item[0]-1][item[1]-1] = "("
+            elif ship.name == "submarine":
+                self.board[item[0]-1][item[1]-1] = "="
+            elif ship.name == "destroyer":
+                self.board[item[0]-1][item[1]-1] = "<"
         return True           
 
     def place_comp_ship(self, ship):
@@ -75,7 +116,16 @@ class Board:
         except IndexError:
             return False
         for item in coordinates:
-            self.board[item[0]-1][item[1]-1] = "<"
+            if ship.name == "carrier":
+                self.board[item[0]-1][item[1]-1] = "["
+            elif ship.name == "battleship":
+                self.board[item[0]-1][item[1]-1] = "{"
+            elif ship.name == "cruiser":
+                self.board[item[0]-1][item[1]-1] = "("
+            elif ship.name == "submarine":
+                self.board[item[0]-1][item[1]-1] = "="
+            elif ship.name == "destroyer":
+                self.board[item[0]-1][item[1]-1] = "<"
         return True
 
     def print_board(self):

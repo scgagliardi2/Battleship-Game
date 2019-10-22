@@ -3,8 +3,8 @@ import Board
 import Ship
 
 #create players
-hp = Player.Player() #human player
-cp = Player.Player() #computer player
+hp = Player.Player("human") #human player
+cp = Player.Player("computer") #computer player
 
 #print intial board
 print("Welcome to Battleship, here is your board!")
@@ -126,12 +126,17 @@ while True:
 
 #human guess
     while True:
-        guess = input("Where would you like to guess? ")
-        if hp.guess(guess):
-            guess = guess.upper()
-            if cp.personal_board.check_guess(guess, hp.guess_board):
-                hp.guess_board.print_board()
-                break
-            else:
-                pass
+        guess = hp.guess()
+        if cp.personal_board.check_guess(guess, hp.guess_board, cp):
+            hp.guess_board.print_board()
+            break
+        else:
+            pass
+#computer guess:
+    while True:
+        guess = cp.comp_guess()
+        if hp.personal_board.check_guess(guess, cp.guess_board, hp):
+            break
+        else:
+            pass
     
