@@ -124,11 +124,18 @@ while True:
 
 while True:
 
+    print("___________________________")
+    print("     Guessing Board")
+    hp.guess_board.print_board()
+    print("___________________________")
+    print("     Your Board")
+    hp.personal_board.print_board()
+    print()
+    
 #human guess
     while True:
         guess = hp.guess()
         if cp.personal_board.check_guess(guess, hp.guess_board, cp):
-            hp.guess_board.print_board()
             break
         else:
             pass

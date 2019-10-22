@@ -26,7 +26,7 @@ class Board:
                              "5": 5, "6": 6, "7": 7, "8": 8, "9": 9, "10": 10}
         return column_dictionary.get(number)
 
-    def check_guess(self, coordinate, board_in, player):
+    def check_guess(self, coordinate, guess_board, player):
         column = self.find_column(coordinate[0])
         row = self.find_row(coordinate[1])
          # check for row 10 input
@@ -38,47 +38,75 @@ class Board:
         except IndexError:
             pass
         if self.board[row][column] == "o":
-            print("You missed!")
-            board_in.board[row][column] = "m"
+            if player.player_type == "computer":
+                print("You missed!")
+                guess_board.board[row][column] = "m"
+                self.board[row][column] = "m"
+            else:
+                print("The enemy missed!")
+                player.personal_board.board[row][column] = "m"
             return True
         elif self.board[row][column] == "<":
-            print("Hit!")
-            board_in.board[row][column] = "H"
+            if player.player_type == "computer":
+                print("Hit!")
+            else:
+                print("The enemy hit your destroyer!")
+            guess_board.board[row][column] = "H"
+            self.board[row][column] = "H"
             player.ship_hit(player.destroyer)
             if player.player_type == "human":
-                player.personal_board[row][column] = "H"
+                player.personal_board.board[row][column] = "H"
             return True
         elif self.board[row][column] == "(":
-            print("Hit!")
-            board_in.board[row][column] = "H"
+            if player.player_type == "computer":
+                print("Hit!")
+            else:
+                print("The enemy hit your cruiser!")
+            guess_board.board[row][column] = "H"
+            self.board[row][column] = "H"
             player.ship_hit(player.cruiser)
             if player.player_type == "human":
-                player.personal_board[row][column] = "H"
+                player.personal_board.board[row][column] = "H"
             return True
         elif self.board[row][column] == "=":
-            print("Hit!")
-            board_in.board[row][column] = "H"
+            if player.player_type == "computer":
+                print("Hit!")
+            else:
+                print("The enemy hit your submarine!")
+            guess_board.board[row][column] = "H"
+            self.board[row][column] = "H"
             player.ship_hit(player.submarine)
             if player.player_type == "human":
-                player.personal_board[row][column] = "H"
+                player.personal_board.board[row][column] = "H"
             return True
         elif self.board[row][column] == "{":
-            print("Hit!")
-            board_in.board[row][column] = "H"
+            if player.player_type == "computer":
+                print("Hit!")
+            else:
+                print("The enemy hit your battleship!")
+            guess_board.board[row][column] = "H"
+            self.board[row][column] = "H"
             player.ship_hit(player.battleship)
             if player.player_type == "human":
-                player.personal_board[row][column] = "H"
+                player.personal_board.board[row][column] = "H"
             return True
         elif self.board[row][column] == "[":
-            print("Hit!")
-            board_in.board[row][column] = "H"
+            if player.player_type == "computer":
+                print("Hit!")
+            else:
+                print("The enemy hit your carrier!")
+            guess_board.board[row][column] = "H"
+            self.board[row][column] = "H"
             player.ship_hit(player.carrier)
             if player.player_type == "human":
-                player.personal_board[row][column] = "H"
+                player.personal_board.board[row][column] = "H"
             return True
         else:
-            print("You already guessed there!")
-            return False
+            if player.player_type == "computer":
+                print("You already guessed there!")
+                return False
+            else:
+                return False
 
     def place_ship(self, ship):
         coordinates = Ship.Ship.ship_coordinates(ship)        
@@ -133,4 +161,4 @@ class Board:
             print()
             for item in row:
                 print(item, end=" ")
-        print()
+        print("")

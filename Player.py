@@ -72,8 +72,8 @@ class Player:
     def comp_guess(self):
         letter_list = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
         number_list = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
-        letter = letter_list[random.randint(1, 10)]
-        number = number_list[random.randint(1, 10)]
+        letter = letter_list[random.randint(0, 9)]
+        number = number_list[random.randint(0, 9)]
         return letter + number
 
     def ship_hit(self, ship):
